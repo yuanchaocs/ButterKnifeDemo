@@ -14,7 +14,7 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 
 public class MainActivity extends AppCompatActivity {
-
+  
     @BindView(R.id.textView) TextView mTextView;
     @BindString(R.string.app_name)String appName;
     @BindColor(R.color.colorPrimary)int colorPrimary;

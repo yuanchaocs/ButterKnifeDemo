@@ -14,7 +14,7 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 
 public class MainActivity extends AppCompatActivity {
-  
+
     @BindView(R.id.textView) TextView mTextView;
     @BindString(R.string.app_name)String appName;
     @BindColor(R.color.colorPrimary)int colorPrimary;
@@ -26,12 +26,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mUnbinder = ButterKnife.bind(this);
+
+        mTextView.setText(appName);
     }
 
     @Override protected void onDestroy() {
         super.onDestroy();
         mUnbinder.unbind();
-
     }
 
     public boolean isOpen(){

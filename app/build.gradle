@@ -1,0 +1,46 @@
+apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
+android {
+    compileSdkVersion 24
+    buildToolsVersion "24.0.2"
+    defaultConfig {
+        applicationId "com.feicuiedu.butterknifedemo"
+        minSdkVersion 19
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:24.0.0'
+    testCompile 'junit:junit:4.12'
+    // 依赖ButterKnife
+    // 官方文档：https://github.com/JakeWharton/butterknife
+    compile 'com.jakewharton:butterknife:8.2.0'
+    // 问题：它用到apt插件来生成代码
+    // 所以，如下
+    apt 'com.jakewharton:butterknife-compiler:8.2.0'
+    // 问题：这是apt的写法,我们只是用到了
+    //                  apply plugin: 'com.android.application'
+    // 所以,如最上面
+    //             apply plugin: 'android-apt'
+
+    // 问题：apt项目是不认识的东西呀!
+    // 所以，在project的gradle文件中加入以下内容：
+    // dependencies {
+    //        classpath 'com.android.tools.build:gradle:2.2.0'
+    //        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+    //    }
+}
